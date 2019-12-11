@@ -92,6 +92,7 @@ master.menu.worker.application.list = Ver solicitudes
 
 master.menu.employer = Empleador
 master.menu.employer.job.list = Ver empleos
+master.menu.employer.job.create = Nuevo empleo
 master.menu.employer.application.list = Aplicaciones hechas a mis trabajos
 
 # master.menu.auditor

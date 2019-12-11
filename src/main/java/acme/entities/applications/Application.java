@@ -17,6 +17,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
 import acme.entities.jobs.Job;
+import acme.entities.roles.Worker;
 import acme.framework.entities.DomainEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -56,5 +57,10 @@ public class Application extends DomainEntity {
 	@Valid
 	@ManyToOne(optional = false)
 	private Job					job;
+
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	private Worker				worker;
 
 }

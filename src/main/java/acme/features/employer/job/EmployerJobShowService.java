@@ -1,9 +1,12 @@
 
 package acme.features.employer.job;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.applications.Application;
 import acme.entities.jobs.Job;
 import acme.entities.roles.Employer;
 import acme.framework.components.Model;
@@ -34,7 +37,14 @@ public class EmployerJobShowService implements AbstractShowService<Employer, Job
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "id", "reference", "title", "status", "deadline", "moreInfo", "salary", "description");
+		request.unbind(entity, model, "id", "reference", "title", "status", "deadline", "moreInfo", "salary", "description", "finalMode");
+		Collection<Application> apps = this.repository.findApplicationsFromJob(entity.getId());
+		if (apps.isEmpty()) {
+			model.setAttribute("canBeDeleted", true);
+		}
+		if (!entity.getFinalMode()) {
+			model.setAttribute("canBeUpdated", true);
+		}
 	}
 
 	@Override

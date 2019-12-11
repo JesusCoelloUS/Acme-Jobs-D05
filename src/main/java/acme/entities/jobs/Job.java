@@ -1,12 +1,11 @@
 
 package acme.entities.jobs;
 
-import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.transaction.Transactional;
@@ -18,8 +17,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.URL;
 
-import acme.entities.applications.Application;
-import acme.entities.duties.Duty;
+import acme.entities.roles.Employer;
 import acme.framework.datatypes.Money;
 import acme.framework.entities.DomainEntity;
 import lombok.Getter;
@@ -60,6 +58,8 @@ public class Job extends DomainEntity {
 	@NotBlank
 	private String				description;
 
+	private Boolean				finalMode;
+
 
 	@Transactional
 	public boolean isActive() {
@@ -69,10 +69,9 @@ public class Job extends DomainEntity {
 
 	//Relationships
 
-	@OneToMany
-	private Collection<Duty>		duties;
-
-	@OneToMany(mappedBy = "job")
-	private Collection<Application>	applications;
+	@NotNull
+	@Valid
+	@ManyToOne(optional = false)
+	private Employer employer;
 
 }

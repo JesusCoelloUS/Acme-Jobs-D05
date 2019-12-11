@@ -93,6 +93,7 @@ master.menu.worker.application.list = Applications
 
 master.menu.employer = Employer
 master.menu.employer.job.list = List jobs
+master.menu.employer.job.create = New job
 master.menu.employer.application.list = Applications made to my jobs
 
 # master.menu.auditor

@@ -33,6 +33,7 @@
         `statement` varchar(255),
         `status` varchar(255),
         `job_id` integer not null,
+        `worker_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -43,6 +44,7 @@
         `creation_moment` datetime(6),
         `status` varchar(255),
         `title` varchar(255),
+        `auditor_id` integer not null,
         `job_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
@@ -54,11 +56,6 @@
         `firm` varchar(255),
         `responsability_statement` varchar(255),
         primary key (`id`)
-    ) engine=InnoDB;
-
-    create table `auditor_audit_record` (
-       `auditor_id` integer not null,
-        `audit_records_id` integer not null
     ) engine=InnoDB;
 
     create table `authenticated` (
@@ -108,7 +105,7 @@
        `id` integer not null,
         `version` integer not null,
         `spam_words` varchar(255),
-        `threshold` double precision,
+        `threshold` integer,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -127,6 +124,7 @@
         `description` varchar(255),
         `percentage` double precision,
         `title` varchar(255),
+        `job_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
 
@@ -137,11 +135,6 @@
         `company` varchar(255),
         `sector` varchar(255),
         primary key (`id`)
-    ) engine=InnoDB;
-
-    create table `employer_job` (
-       `employer_id` integer not null,
-        `jobs_id` integer not null
     ) engine=InnoDB;
 
     create table `investor_record` (
@@ -159,18 +152,15 @@
         `version` integer not null,
         `deadline` datetime(6),
         `description` varchar(255),
+        `final_mode` bit,
         `more_info` varchar(255),
         `reference` varchar(255),
         `salary_amount` double precision,
         `salary_currency` varchar(255),
         `status` varchar(255),
         `title` varchar(255),
+        `employer_id` integer not null,
         primary key (`id`)
-    ) engine=InnoDB;
-
-    create table `job_duty` (
-       `job_id` integer not null,
-        `duties_id` integer not null
     ) engine=InnoDB;
 
     create table `offer` (
@@ -231,17 +221,13 @@
         `creation_moment` datetime(6),
         `tags` varchar(255),
         `title` varchar(255),
+        `thread_id` integer not null,
         primary key (`id`)
     ) engine=InnoDB;
 
     create table `thread_authenticated` (
        `thread_id` integer not null,
         `users_id` integer not null
-    ) engine=InnoDB;
-
-    create table `thread_thread_message` (
-       `thread_id` integer not null,
-        `thread_messages_id` integer not null
     ) engine=InnoDB;
 
     create table `user_account` (
@@ -265,11 +251,6 @@
         primary key (`id`)
     ) engine=InnoDB;
 
-    create table `worker_application` (
-       `worker_id` integer not null,
-        `applications_id` integer not null
-    ) engine=InnoDB;
-
     create table `hibernate_sequence` (
        `next_val` bigint
     ) engine=InnoDB;
@@ -279,17 +260,8 @@
     alter table `application` 
        add constraint UK_ct7r18vvxl5g4c4k7aefpa4do unique (`reference`);
 
-    alter table `auditor_audit_record` 
-       add constraint UK_f4solktf7yvt2grylyfa3rgjo unique (`audit_records_id`);
-
-    alter table `employer_job` 
-       add constraint UK_k7bs8pqirrx2i95s7xki2ei22 unique (`jobs_id`);
-
     alter table `job` 
        add constraint UK_7jmfdvs0b0jx7i33qxgv22h7b unique (`reference`);
-
-    alter table `job_duty` 
-       add constraint UK_8l5irvacqjnfw08o1x5v1y97v unique (`duties_id`);
 
     alter table `offer` 
        add constraint UK_iex7e8fs0fh89yxpcnm1orjkm unique (`ticker`);
@@ -297,14 +269,8 @@
     alter table `request` 
        add constraint UK_9mxq3powq8tqctclj0fbi2nih unique (`ticker`);
 
-    alter table `thread_thread_message` 
-       add constraint UK_l4g6jmhtrwg25unn2s6e06jxp unique (`thread_messages_id`);
-
     alter table `user_account` 
        add constraint UK_castjbvpeeus0r8lbpehiu0e4 unique (`username`);
-
-    alter table `worker_application` 
-       add constraint UK_buhx0gequyp0a2vmiwr0g90sw unique (`applications_id`);
 
     alter table `administrator` 
        add constraint FK_2a5vcjo3stlfcwadosjfq49l1 
@@ -321,6 +287,16 @@
        foreign key (`job_id`) 
        references `job` (`id`);
 
+    alter table `application` 
+       add constraint `FKmbjdoxi3o93agxosoate4sxbt` 
+       foreign key (`worker_id`) 
+       references `worker` (`id`);
+
+    alter table `audit_record` 
+       add constraint `FKdcrrgv6rkfw2ruvdja56un4ji` 
+       foreign key (`auditor_id`) 
+       references `auditor` (`id`);
+
     alter table `audit_record` 
        add constraint `FKlbvbyimxf6pxvbhkdd4vfhlnd` 
        foreign key (`job_id`) 
@@ -330,16 +306,6 @@
        add constraint FK_clqcq9lyspxdxcp6o4f3vkelj 
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
-
-    alter table `auditor_audit_record` 
-       add constraint `FKt6cgpxno7j90q5jkrue6t6432` 
-       foreign key (`audit_records_id`) 
-       references `audit_record` (`id`);
-
-    alter table `auditor_audit_record` 
-       add constraint `FKi28w85w2g1nhcmvactdguahqq` 
-       foreign key (`auditor_id`) 
-       references `auditor` (`id`);
 
     alter table `authenticated` 
        add constraint FK_h52w0f3wjoi68b63wv9vwon57 
@@ -351,35 +317,30 @@
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
 
+    alter table `duty` 
+       add constraint `FKs2uoxh4i5ya8ptyefae60iao1` 
+       foreign key (`job_id`) 
+       references `job` (`id`);
+
     alter table `employer` 
        add constraint FK_na4dfobmeuxkwf6p75abmb2tr 
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
 
-    alter table `employer_job` 
-       add constraint `FK9021shkjx8mv4go6ujdjt94q4` 
-       foreign key (`jobs_id`) 
-       references `job` (`id`);
-
-    alter table `employer_job` 
-       add constraint `FKtr91uryf2mp5ehddqni6sy8qm` 
+    alter table `job` 
+       add constraint `FK3rxjf8uh6fh2u990pe8i2at0e` 
        foreign key (`employer_id`) 
        references `employer` (`id`);
-
-    alter table `job_duty` 
-       add constraint `FK9uwg2js056tp1m971wy3xesua` 
-       foreign key (`duties_id`) 
-       references `duty` (`id`);
-
-    alter table `job_duty` 
-       add constraint `FKrxu09f16kvcibraroor41bpmr` 
-       foreign key (`job_id`) 
-       references `job` (`id`);
 
     alter table `provider` 
        add constraint FK_b1gwnjqm6ggy9yuiqm0o4rlmd 
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
+
+    alter table `thread_message` 
+       add constraint `FKgjodhp3io8v829t92y1tdtb7u` 
+       foreign key (`thread_id`) 
+       references `thread` (`id`);
 
     alter table `thread_authenticated` 
        add constraint `FKkuamwlt147dsxim98bfhh4dsr` 
@@ -391,27 +352,7 @@
        foreign key (`thread_id`) 
        references `thread` (`id`);
 
-    alter table `thread_thread_message` 
-       add constraint `FK80pog75t7l0550qt5c9qlgaw3` 
-       foreign key (`thread_messages_id`) 
-       references `thread_message` (`id`);
-
-    alter table `thread_thread_message` 
-       add constraint `FK9u6sxds39e4hpi67jfi90a1r5` 
-       foreign key (`thread_id`) 
-       references `thread` (`id`);
-
     alter table `worker` 
        add constraint FK_l5q1f33vs2drypmbdhpdgwfv3 
        foreign key (`user_account_id`) 
        references `user_account` (`id`);
-
-    alter table `worker_application` 
-       add constraint `FK9wsdvselu5eevkhrxub2ouvy2` 
-       foreign key (`applications_id`) 
-       references `application` (`id`);
-
-    alter table `worker_application` 
-       add constraint `FK5wwpk28fthtkfwwda7xa8vdtr` 
-       foreign key (`worker_id`) 
-       references `worker` (`id`);

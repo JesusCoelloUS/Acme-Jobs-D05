@@ -14,7 +14,7 @@ import acme.framework.repositories.AbstractRepository;
 @Repository
 public interface AuthenticatedThreadMessageRepository extends AbstractRepository {
 
-	@Query("select t.threadMessages from Thread t where t.id=?1")
+	@Query("select tm from ThreadMessage tm where tm.thread.id=?1")
 	Collection<ThreadMessage> findManyByThread(int id);
 
 	@Query("select t from Thread t where t.id=?1")
