@@ -6,13 +6,11 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
-import acme.entities.threadMessages.ThreadMessage;
 import acme.framework.entities.Authenticated;
 import acme.framework.entities.DomainEntity;
 import lombok.Getter;
@@ -35,9 +33,6 @@ public class Thread extends DomainEntity {
 	private Date						moment;
 
 	//Relationships
-
-	@OneToMany
-	private Collection<ThreadMessage>	threadMessages;
 
 	@ManyToMany
 	private Collection<Authenticated>	users;

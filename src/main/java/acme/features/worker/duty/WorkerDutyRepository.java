@@ -14,7 +14,7 @@ import acme.framework.repositories.AbstractRepository;
 @Repository
 public interface WorkerDutyRepository extends AbstractRepository {
 
-	@Query("select j.duties from Job j where j.id=?1")
+	@Query("select d from Duty d where d.job.id=?1")
 	Collection<Duty> findDutiesFromJob(int id);
 
 	@Query("select j from Job j where j.id=?1")

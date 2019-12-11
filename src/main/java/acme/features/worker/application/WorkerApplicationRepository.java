@@ -16,7 +16,7 @@ public interface WorkerApplicationRepository extends AbstractRepository {
 	@Query("select a from Application a where a.id=?1")
 	Application findOneApplicationById(int id);
 
-	@Query("select w.applications from Worker w where w.id=?1")
+	@Query("select a from Application a where a.worker.id=?1")
 	Collection<Application> findManyByWorkerId(int workerId);
 
 	@Query("select w from Worker w where w.id=?1")

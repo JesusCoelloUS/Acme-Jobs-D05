@@ -13,10 +13,10 @@ import acme.framework.repositories.AbstractRepository;
 @Repository
 public interface AuditorJobRepository extends AbstractRepository {
 
-	@Query("select distinct j from Auditor a join a.auditRecords ar join ar.job j on a.id=?1")
+	@Query("select distinct ar.job from AuditRecord ar where ar.auditor.id=?1")
 	Collection<Job> findMyJobs(int id);
-	
-	@Query("select j from Job j where j not in (select distinct j1 from Auditor a join a.auditRecords ar join ar.job j1 where a.id=?1)")
+
+	@Query("select ar.job from AuditRecord ar where ar.job not in (select distinct ar1.job from AuditRecord ar1 where ar1.auditor.id=?1)")
 	Collection<Job> findOtherJobs(int id);
 
 	@Query("select j from Job j where j.id=?1")
