@@ -495,6 +495,7 @@
 	<bean id="application1worker1" class="acme.entities.applications.Application">
 		<property name="reference" value="EMP1-JOB1:WOR1a"/>
 		<property name="status" value="ACCEPTED"/>
+		<property name="rejectDecision" value=""/>
 		<property name="statement" value="Here is my statement"/>
 		<property name="creationMoment" value="2019/11/10 12:00"/>
 		<property name="skills" value="Here are my skills"/>
@@ -506,6 +507,7 @@
 	<bean id="application2worker1" class="acme.entities.applications.Application">
 		<property name="reference" value="EMP1-JOB1:WOR1b"/>
 		<property name="status" value="ACCEPTED"/>
+		<property name="rejectDecision" value=""/>
 		<property name="statement" value="Here is my statement"/>
 		<property name="creationMoment" value="2019/10/10 12:00"/>
 		<property name="skills" value="Here are my skills"/>
@@ -517,6 +519,7 @@
 	<bean id="application3worker1" class="acme.entities.applications.Application">
 		<property name="reference" value="EMP1-JOB2:WOR1"/>
 		<property name="status" value="REJECTED"/>
+		<property name="rejectDecision" value="This is why we rejected this application"/>
 		<property name="statement" value="Here is my statement"/>
 		<property name="creationMoment" value="2019/10/25 12:00"/>
 		<property name="skills" value="Here are my skills"/>
@@ -528,6 +531,7 @@
 	<bean id="application4worker1" class="acme.entities.applications.Application">
 		<property name="reference" value="EMP1-JOB3:WOR1"/>
 		<property name="status" value="PENDING"/>
+		<property name="rejectDecision" value=""/>
 		<property name="statement" value="Here is my statement"/>
 		<property name="creationMoment" value="2019/10/25 12:00"/>
 		<property name="skills" value="Here are my skills"/>
@@ -539,6 +543,7 @@
 	<bean id="application5worker1" class="acme.entities.applications.Application">
 		<property name="reference" value="EMP1-JOB4:WOR1"/>
 		<property name="status" value="PENDING"/>
+		<property name="rejectDecision" value=""/>
 		<property name="statement" value="Here is my statement"/>
 		<property name="creationMoment" value="2019/10/25 12:00"/>
 		<property name="skills" value="Here are my skills"/>

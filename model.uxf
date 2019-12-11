@@ -318,7 +318,7 @@ Duty
       <x>783</x>
       <y>369</y>
       <w>351</w>
-      <h>126</h>
+      <h>144</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 Application
@@ -328,7 +328,8 @@ Application
 +status:String{NotBlank}
 +statement:String{NotBlank}
 +skills:String{NotBlank}
-+qualifications:String{NotBlank}</panel_attributes>
++qualifications:String{NotBlank}
++rejectDecision:String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -705,7 +706,7 @@ AuditRecord
     <id>UMLNote</id>
     <coordinates>
       <x>783</x>
-      <y>495</y>
+      <y>513</y>
       <w>351</w>
       <h>27</h>
     </coordinates>
