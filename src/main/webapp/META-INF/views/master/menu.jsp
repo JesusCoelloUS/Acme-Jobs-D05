@@ -43,6 +43,8 @@
 			<acme:menu-suboption code="master.menu.authenticated.challenge.list" action="/authenticated/challenge/list"/>
 			<acme:menu-suboption code="master.menu.authenticated.thread.list" action="/authenticated/thread/list-involved"/>
 			<acme:menu-suboption code="master.menu.authenticated.job.list" action="/authenticated/job/list"/>
+			<acme:menu-suboption code="master.menu.authenticated.employer.create" action="/authenticated/employer/create"/>
+			<acme:menu-suboption code="master.menu.authenticated.worker.create" action="/authenticated/worker/create"/>
 		</acme:menu-option>
 
 		<!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->
