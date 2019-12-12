@@ -38,6 +38,8 @@ public class Application extends DomainEntity {
 	@Pattern(regexp = "^(PENDING|ACCEPTED|REJECTED)$")
 	private String				status;
 
+	private String				rejectDecision;
+
 	@NotBlank
 	private String				statement;
 

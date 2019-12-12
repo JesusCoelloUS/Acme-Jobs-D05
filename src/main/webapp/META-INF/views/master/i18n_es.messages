@@ -87,6 +87,7 @@ master.menu.consumer.offer.create = Nueva oferta
 
 master.menu.worker = Trabajador
 master.menu.worker.application.list = Ver solicitudes
+master.menu.worker.job.list.active = Ver empleos activos
 
 # master.menu.employer ########################################################
 

@@ -8,6 +8,11 @@
 # purposes.  The copyright owner does not job any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+worker.job.list.label.reference = Referencia
+worker.job.list.label.title = Título
+worker.job.list.label.deadline = Fecha de Vencimiento
+worker.job.list.label.status = Estado
+
 worker.job.form.label.reference = Referencia
 worker.job.form.label.deadline = Fecha de vencimiento
 worker.job.form.label.title = Título
@@ -18,3 +23,4 @@ worker.job.form.label.description = Descripción
 worker.job.form.button.return = Volver
 worker.job.form.button.duties = Deberes
 worker.job.form.button.auditRecords = Registros de auditor
+worker.job.form.button.application.create = Hacer solicitud

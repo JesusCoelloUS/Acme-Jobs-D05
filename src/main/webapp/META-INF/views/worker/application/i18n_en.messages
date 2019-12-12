@@ -21,3 +21,4 @@ worker.application.form.label.skills = Skills
 worker.application.form.label.qualifications = Qualifications
 worker.application.form.button.job = Job
 worker.application.form.button.return = Return
+worker.application.form.button.create = Apply

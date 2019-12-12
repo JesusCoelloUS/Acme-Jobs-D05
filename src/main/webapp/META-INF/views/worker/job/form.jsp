@@ -26,6 +26,9 @@
 	<acme:form-url code="worker.job.form.label.moreInfo" path="moreInfo"/>
 	
 	<acme:button code="worker.job.form.button.duties" action="/acme-jobs/worker/duty/list?id=${id}"/>
+	<jstl:if test="${isActive}">
+	<acme:button code="worker.job.form.button.application.create" action="/acme-jobs/worker/application/create?jobId=${id}"/>
+	</jstl:if>
 	<acme:button code="worker.job.form.button.auditRecords" action="/acme-jobs/authenticated/audit-record/list?id=${id}"/>
   	<acme:form-return code="worker.job.form.button.return"/>
 </acme:form>
