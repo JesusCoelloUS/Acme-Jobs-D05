@@ -35,3 +35,4 @@ employer.job.form.button.auditRecords = Registros de auditor
 
 employer.job.error.spam = Este empleo es spam
 employer.job.error.duties = No puede guardarse en estado final un empleo hasta que sus deberes sumen 100%
+employer.job.error.reference = Este empleo ya existe

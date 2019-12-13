@@ -52,6 +52,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		Job res = new Job();
 		Employer e = this.repository.findOneEmployerById(request.getPrincipal().getActiveRoleId());
 		res.setEmployer(e);
+		res.setFinalMode(false);
 		return res;
 	}
 
@@ -61,6 +62,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		assert entity != null;
 		assert errors != null;
 		errors.state(request, !this.isSpam(entity), "description", "employer.job.error.spam");
+		errors.state(request, this.checkReference(entity), "reference", "employer.job.error.reference");
 	}
 
 	private boolean isSpam(final Job j) {
@@ -80,11 +82,20 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		return nSpamWords >= c.getThreshold();
 	}
 
+	private boolean checkReference(final Job job) {
+		Collection<Job> all = this.repository.findAllJobs();
+		for (Job j : all) {
+			if (job.getReference().equals(j.getReference())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public void create(final Request<Job> request, final Job entity) {
 		assert request != null;
 		assert entity != null;
-		entity.setFinalMode(false);
 		this.repository.save(entity);
 	}
 

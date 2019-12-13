@@ -58,8 +58,19 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+		errors.state(request, this.checkReference(entity), "reference", "employer.job.error.reference");
 		errors.state(request, !this.isSpam(entity), "description", "employer.job.error.spam");
 		errors.state(request, this.dutyCompleted(entity), "finalMode", "employer.job.error.duties");
+	}
+
+	private boolean checkReference(final Job job) {
+		Collection<Job> all = this.repository.findAllJobs();
+		for (Job j : all) {
+			if (job.getReference().equals(j.getReference())) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	private boolean dutyCompleted(final Job job) {
