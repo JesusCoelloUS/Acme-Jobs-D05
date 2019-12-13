@@ -66,7 +66,7 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 	private boolean checkReference(final Job job) {
 		Collection<Job> all = this.repository.findAllJobs();
 		for (Job j : all) {
-			if (job.getReference().equals(j.getReference())) {
+			if (!job.equals(j) && job.getReference().equals(j.getReference())) {
 				return false;
 			}
 		}

@@ -28,32 +28,6 @@
 
 	<acme:form-textbox code="employer.application.form.label.reference" path="reference" readonly="true"/>
 	
-	<%-- <jstl:if test="${status == 'PENDING'}">
-		<acme:form-select code="employer.application.form.label.status" path="status">
-			<acme:form-option code="employer.application.form.label.status.pending" value="PENDING"/>
-			<acme:form-option code="employer.application.form.label.status.accepted" value="ACCEPTED"/>
-			<acme:form-option code="employer.application.form.label.status.rejected" value="REJECTED"/>
-		</acme:form-select>
-		<acme:form-textarea code="employer.application.form.label.rejectDecision" path="rejectDecision"/>
-	</jstl:if>
-	<jstl:if test="${status == 'REJECTED'}">
-		<jstl:if test="${rejectDecision == ''}">
-			<acme:form-select code="employer.application.form.label.status" path="status">
-			<acme:form-option code="employer.application.form.label.status.pending" value="PENDING"/>
-			<acme:form-option code="employer.application.form.label.status.accepted" value="ACCEPTED"/>
-			<acme:form-option code="employer.application.form.label.status.rejected" value="REJECTED"/>
-		</acme:form-select>
-		<acme:form-textarea code="employer.application.form.label.rejectDecision" path="rejectDecision"/>
-		</jstl:if>
-		<jstl:if test="${rejectDecision != ''}">
-			<acme:form-textbox code="employer.application.form.label.status" path="status" readonly="true"/>
-			<acme:form-textarea code="employer.application.form.label.rejectDecision" path="rejectDecision" readonly="true"/>
-		</jstl:if>
-	</jstl:if>
-	<jstl:if test="${status == 'ACCEPTED'}">
-		<acme:form-textbox code="employer.application.form.label.status" path="status" readonly="true"/>
-	</jstl:if> --%>
-	
 	<jstl:choose>
 		<jstl:when test="${status == 'PENDING' || (status == 'REJECTED' && rejectDecision == '') || (status == 'ACCEPTED' && rejectDecision != '')}">
 			<acme:form-select code="employer.application.form.label.status" path="status">
