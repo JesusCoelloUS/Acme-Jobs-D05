@@ -77,6 +77,9 @@
 			<acme:menu-suboption code="master.menu.employer.job.list" action="/employer/job/list-mine"/>
 			<acme:menu-suboption code="master.menu.employer.job.create" action="/employer/job/create"/>
       		<acme:menu-suboption code="master.menu.employer.application.list" action="/employer/application/list-mine"/>
+      		<acme:menu-suboption code="master.menu.employer.application.list.byreference" action="/employer/application/list-by-reference"/>
+      		<acme:menu-suboption code="master.menu.employer.application.list.bystatus" action="/employer/application/list-by-status"/>
+      		<acme:menu-suboption code="master.menu.employer.application.list.bycreationmoment" action="/employer/application/list-by-creationmoment"/>
 		</acme:menu-option>
     
     <!-- ---------------------------------------------------------------------------------------------------------------------------------------------- -->

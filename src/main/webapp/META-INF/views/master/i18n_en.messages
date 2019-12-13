@@ -95,6 +95,9 @@ master.menu.employer = Employer
 master.menu.employer.job.list = List jobs
 master.menu.employer.job.create = New job
 master.menu.employer.application.list = Applications made to my jobs
+master.menu.employer.application.list.byreference = Applications made to my jobs grouped by reference
+master.menu.employer.application.list.bystatus = Applications made to my jobs grouped by status
+master.menu.employer.application.list.bycreationmoment = Applications made to my jobs grouped by creation moment
 
 # master.menu.auditor
 

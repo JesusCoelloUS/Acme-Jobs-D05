@@ -94,6 +94,9 @@ master.menu.employer = Empleador
 master.menu.employer.job.list = Ver empleos
 master.menu.employer.job.create = Nuevo empleo
 master.menu.employer.application.list = Aplicaciones hechas a mis trabajos
+master.menu.employer.application.list.byreference = Aplicaciones hechas a mis trabajos agrupadas por referencia
+master.menu.employer.application.list.bystatus = Aplicaciones hechas a mis trabajos agrupadas por estado
+master.menu.employer.application.list.bycreationmoment = Aplicaciones hechas a mis trabajos agrupadas por fecha de creación
 
 # master.menu.auditor
 
