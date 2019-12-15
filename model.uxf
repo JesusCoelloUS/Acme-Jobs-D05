@@ -690,7 +690,7 @@ m2=1</panel_attributes>
       <x>1305</x>
       <y>270</y>
       <w>315</w>
-      <h>99</h>
+      <h>108</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Entity&gt;&gt;
 AuditRecord
@@ -699,6 +699,7 @@ AuditRecord
 +status:String{NotBLank}
 +creationMoment:Date{Temporal(TIMESTAMP),Past}
 +body:String{NotBlank}
++finalMode:Boolean
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -762,7 +763,7 @@ Shout
     <id>UMLNote</id>
     <coordinates>
       <x>1305</x>
-      <y>369</y>
+      <y>378</y>
       <w>261</w>
       <h>27</h>
     </coordinates>
