@@ -11,7 +11,6 @@ import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.components.Response;
 import acme.framework.entities.Authenticated;
-import acme.framework.entities.Principal;
 import acme.framework.entities.UserAccount;
 import acme.framework.helpers.PrincipalHelper;
 import acme.framework.services.AbstractCreateService;
@@ -20,7 +19,7 @@ import acme.framework.services.AbstractCreateService;
 public class AuthenticatedWorkerCreateService implements AbstractCreateService<Authenticated, Worker> {
 
 	@Autowired
-	private AuthenticatedWorkerRepository repository;
+	AuthenticatedWorkerRepository repository;
 
 
 	@Override
@@ -34,7 +33,6 @@ public class AuthenticatedWorkerCreateService implements AbstractCreateService<A
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-
 		request.bind(entity, errors);
 	}
 
@@ -43,25 +41,15 @@ public class AuthenticatedWorkerCreateService implements AbstractCreateService<A
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-
-		request.unbind(entity, model, "qualifications", "skills");
-
+		request.unbind(entity, model, "skills", "qualifications");
 	}
 
 	@Override
 	public Worker instantiate(final Request<Worker> request) {
 		assert request != null;
-		Worker res;
-		Principal principal;
-		int userAccountId;
-		UserAccount userAccount;
-
-		principal = request.getPrincipal();
-		userAccountId = principal.getAccountId();
-		userAccount = this.repository.findOneUserAccountById(userAccountId);
-
-		res = new Worker();
-		res.setUserAccount(userAccount);
+		UserAccount ua = this.repository.findOneUserAccountById(request.getPrincipal().getAccountId());
+		Worker res = new Worker();
+		res.setUserAccount(ua);
 		return res;
 	}
 
@@ -70,17 +58,15 @@ public class AuthenticatedWorkerCreateService implements AbstractCreateService<A
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-
 	}
 
 	@Override
 	public void create(final Request<Worker> request, final Worker entity) {
 		assert request != null;
 		assert entity != null;
-
 		this.repository.save(entity);
-
 	}
+
 	@Override
 	public void onSuccess(final Request<Worker> request, final Response<Worker> response) {
 		assert request != null;

@@ -18,13 +18,12 @@ public class AuthenticatedWorkerController extends AbstractController<Authentica
 
 	@Autowired
 	private AuthenticatedWorkerCreateService	createService;
-
 	@Autowired
 	private AuthenticatedWorkerUpdateService	updateService;
 
 
 	@PostConstruct
-	private void initialise() {
+	private void initialize() {
 		super.addBasicCommand(BasicCommand.CREATE, this.createService);
 		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
 	}

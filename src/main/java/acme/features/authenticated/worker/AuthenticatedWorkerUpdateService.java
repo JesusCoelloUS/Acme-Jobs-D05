@@ -11,7 +11,6 @@ import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.components.Response;
 import acme.framework.entities.Authenticated;
-import acme.framework.entities.Principal;
 import acme.framework.helpers.PrincipalHelper;
 import acme.framework.services.AbstractUpdateService;
 
@@ -19,7 +18,7 @@ import acme.framework.services.AbstractUpdateService;
 public class AuthenticatedWorkerUpdateService implements AbstractUpdateService<Authenticated, Worker> {
 
 	@Autowired
-	private AuthenticatedWorkerRepository repository;
+	AuthenticatedWorkerRepository repository;
 
 
 	@Override
@@ -33,7 +32,6 @@ public class AuthenticatedWorkerUpdateService implements AbstractUpdateService<A
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-
 		request.bind(entity, errors);
 	}
 
@@ -42,22 +40,13 @@ public class AuthenticatedWorkerUpdateService implements AbstractUpdateService<A
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-
-		request.unbind(entity, model, "qualifications", "skills");
-
+		request.unbind(entity, model, "skills", "qualifications");
 	}
 
 	@Override
 	public Worker findOne(final Request<Worker> request) {
 		assert request != null;
-		Worker res;
-		Principal principal;
-		int userAccountId;
-
-		principal = request.getPrincipal();
-		userAccountId = principal.getAccountId();
-		res = this.repository.findOneWorkerByUserAccountId(userAccountId);
-
+		Worker res = this.repository.findOneWorkerByUserAccountId(request.getPrincipal().getAccountId());
 		return res;
 	}
 
@@ -66,17 +55,15 @@ public class AuthenticatedWorkerUpdateService implements AbstractUpdateService<A
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-
 	}
 
 	@Override
 	public void update(final Request<Worker> request, final Worker entity) {
 		assert request != null;
 		assert entity != null;
-
 		this.repository.save(entity);
-
 	}
+
 	@Override
 	public void onSuccess(final Request<Worker> request, final Response<Worker> response) {
 		assert request != null;

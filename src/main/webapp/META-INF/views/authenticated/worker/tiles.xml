@@ -22,5 +22,4 @@
 		<put-attribute name="body" type="template" value="../authenticated/worker/form.jsp" />
 	</definition>
 
-
 </tiles-definitions>
