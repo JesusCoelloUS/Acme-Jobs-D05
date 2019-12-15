@@ -36,3 +36,4 @@ employer.job.form.button.auditRecords = Audit records
 employer.job.error.spam = This job is spam
 employer.job.error.duties = You cannot save a job in final mode until its duties sums 100%
 employer.job.error.reference = This job already exists
+employer.job.error.deadline = Deadline must be after today

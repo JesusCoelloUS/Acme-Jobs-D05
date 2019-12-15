@@ -2,6 +2,7 @@
 package acme.features.employer.job;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		assert errors != null;
 		errors.state(request, !this.isSpam(entity), "description", "employer.job.error.spam");
 		errors.state(request, this.checkReference(entity), "reference", "employer.job.error.reference");
+		errors.state(request, entity.getDeadline().after(new Date()), "deadline", "employer.job.error.deadline");
 	}
 
 	private boolean isSpam(final Job j) {
