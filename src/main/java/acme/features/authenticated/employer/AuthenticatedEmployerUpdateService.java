@@ -11,7 +11,6 @@ import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.components.Response;
 import acme.framework.entities.Authenticated;
-import acme.framework.entities.Principal;
 import acme.framework.helpers.PrincipalHelper;
 import acme.framework.services.AbstractUpdateService;
 
@@ -19,7 +18,7 @@ import acme.framework.services.AbstractUpdateService;
 public class AuthenticatedEmployerUpdateService implements AbstractUpdateService<Authenticated, Employer> {
 
 	@Autowired
-	private AuthenticatedEmployerRepository repository;
+	AuthenticatedEmployerRepository repository;
 
 
 	@Override
@@ -32,8 +31,8 @@ public class AuthenticatedEmployerUpdateService implements AbstractUpdateService
 	public void bind(final Request<Employer> request, final Employer entity, final Errors errors) {
 		assert request != null;
 		assert entity != null;
+		assert errors != null;
 		request.bind(entity, errors);
-
 	}
 
 	@Override
@@ -42,21 +41,12 @@ public class AuthenticatedEmployerUpdateService implements AbstractUpdateService
 		assert entity != null;
 		assert model != null;
 		request.unbind(entity, model, "company", "sector");
-
 	}
 
 	@Override
 	public Employer findOne(final Request<Employer> request) {
 		assert request != null;
-		Employer res;
-		Principal principal;
-		int userAccountId;
-
-		principal = request.getPrincipal();
-		userAccountId = principal.getAccountId();
-
-		res = this.repository.findOneEmployerByUserAccountId(userAccountId);
-
+		Employer res = this.repository.findOneEmployerByUserAccountId(request.getPrincipal().getAccountId());
 		return res;
 	}
 
@@ -65,23 +55,19 @@ public class AuthenticatedEmployerUpdateService implements AbstractUpdateService
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-
 	}
 
 	@Override
 	public void update(final Request<Employer> request, final Employer entity) {
 		assert request != null;
 		assert entity != null;
-
 		this.repository.save(entity);
-
 	}
 
 	@Override
 	public void onSuccess(final Request<Employer> request, final Response<Employer> response) {
 		assert request != null;
 		assert response != null;
-
 		if (request.isMethod(HttpMethod.POST)) {
 			PrincipalHelper.handleUpdate();
 		}

@@ -11,7 +11,6 @@ import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.components.Response;
 import acme.framework.entities.Authenticated;
-import acme.framework.entities.Principal;
 import acme.framework.entities.UserAccount;
 import acme.framework.helpers.PrincipalHelper;
 import acme.framework.services.AbstractCreateService;
@@ -20,7 +19,7 @@ import acme.framework.services.AbstractCreateService;
 public class AuthenticatedEmployerCreateService implements AbstractCreateService<Authenticated, Employer> {
 
 	@Autowired
-	private AuthenticatedEmployerRepository repository;
+	AuthenticatedEmployerRepository repository;
 
 
 	@Override
@@ -34,7 +33,6 @@ public class AuthenticatedEmployerCreateService implements AbstractCreateService
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-
 		request.bind(entity, errors);
 	}
 
@@ -43,25 +41,15 @@ public class AuthenticatedEmployerCreateService implements AbstractCreateService
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-
 		request.unbind(entity, model, "company", "sector");
-
 	}
 
 	@Override
 	public Employer instantiate(final Request<Employer> request) {
 		assert request != null;
-		Employer res;
-		Principal principal;
-		int userAccountId;
-		UserAccount userAccount;
-
-		principal = request.getPrincipal();
-		userAccountId = principal.getAccountId();
-		userAccount = this.repository.findOneUserAccountById(userAccountId);
-
-		res = new Employer();
-		res.setUserAccount(userAccount);
+		UserAccount ua = this.repository.findOneUserAccountById(request.getPrincipal().getAccountId());
+		Employer res = new Employer();
+		res.setUserAccount(ua);
 		return res;
 	}
 
@@ -70,17 +58,15 @@ public class AuthenticatedEmployerCreateService implements AbstractCreateService
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
-
 	}
 
 	@Override
 	public void create(final Request<Employer> request, final Employer entity) {
 		assert request != null;
 		assert entity != null;
-
 		this.repository.save(entity);
-
 	}
+
 	@Override
 	public void onSuccess(final Request<Employer> request, final Response<Employer> response) {
 		assert request != null;

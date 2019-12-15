@@ -11,9 +11,10 @@ import acme.framework.repositories.AbstractRepository;
 @Repository
 public interface AuthenticatedEmployerRepository extends AbstractRepository {
 
-	@Query("select e from Employer e where e.userAccount.id = ?1")
+	@Query("select e from Employer e where e.userAccount.id=?1")
 	Employer findOneEmployerByUserAccountId(int id);
 
-	@Query("select ua UserAccount ua where ua.id = ?1")
+	@Query("select ua from UserAccount ua where ua.id=?1")
 	UserAccount findOneUserAccountById(int id);
+
 }
