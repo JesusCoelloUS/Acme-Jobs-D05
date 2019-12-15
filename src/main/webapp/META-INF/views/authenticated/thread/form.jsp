@@ -20,6 +20,7 @@
 	<acme:form-textbox code="authenticated.thread.form.label.title" path="title"/>
 	<acme:form-moment code="authenticated.thread.form.label.moment" path="moment"/>
 
-	<acme:button code="authenticated.thread.form.button.messages" action="/acme-jobs/authenticated/thread-message/list?id=${id}"/>	
+	<acme:button code="authenticated.thread.form.button.messages" action="/acme-jobs/authenticated/thread-message/list?id=${id}"/>
+	<acme:button code="authenticated.thread.form.button.message.create" action="/acme-jobs/authenticated/thread-message/create?threadId=${id}"/>	
   	<acme:form-return code="authenticated.thread.form.button.return"/>
 </acme:form>

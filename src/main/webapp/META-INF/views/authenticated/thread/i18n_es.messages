@@ -15,3 +15,4 @@ authenticated.thread.form.label.title = Título
 authenticated.thread.form.label.moment = Fecha
 authenticated.thread.form.button.return = Volver
 authenticated.thread.form.button.messages = Mensajes
+authenticated.thread.form.button.message.create = Nuevo mensaje

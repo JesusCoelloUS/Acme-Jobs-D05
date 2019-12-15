@@ -16,3 +16,4 @@ authenticated.thread-message.form.label.creationMoment = Creation moment
 authenticated.thread-message.form.label.tags = Tags
 authenticated.thread-message.form.label.body = Body
 authenticated.thread-message.form.button.return = Return
+authenticated.thread-message.form.button.create = Send
