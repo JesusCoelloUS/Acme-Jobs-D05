@@ -16,3 +16,4 @@ authenticated.thread-message.form.label.creationMoment = Fecha de creación
 authenticated.thread-message.form.label.tags = Etiquetas
 authenticated.thread-message.form.label.body = Cuerpo
 authenticated.thread-message.form.button.return = Volver
+authenticated.thread-message.form.button.create = Enviar
