@@ -101,6 +101,7 @@ master.menu.employer.application.list = Applications made to my jobs
 master.menu.auditor = Auditor
 master.menu.auditor.job.list.mine = List my jobs
 master.menu.auditor.job.list.others = List other jobs
+master.menu.auditor.audit-record.list = List audit records
 
 # master.menu.user-account ####################################################
 

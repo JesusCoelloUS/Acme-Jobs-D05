@@ -42,6 +42,8 @@ public class AuditRecord extends DomainEntity {
 	@NotBlank
 	private String				body;
 
+	private Boolean				finalMode;
+
 	//Relationships
 
 	@NotNull

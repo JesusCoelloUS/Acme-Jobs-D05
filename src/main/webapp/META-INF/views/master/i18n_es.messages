@@ -100,6 +100,7 @@ master.menu.employer.application.list = Aplicaciones hechas a mis trabajos
 master.menu.auditor = Auditor
 master.menu.auditor.job.list.mine = Ver mis empleos
 master.menu.auditor.job.list.others = Ver otros empleos
+master.menu.auditor.audit-record.list = Ver registros de auditor
 
 # master.menu.user-account ####################################################
 

@@ -561,6 +561,7 @@
 		<property name="body" value="This is the body"/>
 		<property name="job" ref="job1employer1"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+		<property name="finalMode" value="true"/>
 	</bean>
 	
 	<bean id="auditRecord2" class="acme.entities.records.AuditRecord">
@@ -570,6 +571,7 @@
 		<property name="body" value="This is the body"/>
 		<property name="job" ref="job1employer1"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+		<property name="finalMode" value="true"/>
 	</bean>
 	
 	<bean id="auditRecord3" class="acme.entities.records.AuditRecord">
@@ -579,6 +581,7 @@
 		<property name="body" value="This is the body"/>
 		<property name="job" ref="job1employer1"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+		<property name="finalMode" value="true"/>
 	</bean>
 	
 	<bean id="auditRecord4" class="acme.entities.records.AuditRecord">
@@ -588,6 +591,7 @@
 		<property name="body" value="This is the body"/>
 		<property name="job" ref="job2employer1"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+		<property name="finalMode" value="false"/>
 	</bean>
 	
 	<bean id="auditRecord5" class="acme.entities.records.AuditRecord">
@@ -597,6 +601,7 @@
 		<property name="body" value="This is the body"/>
 		<property name="job" ref="job3employer1"/>
 		<property name="auditor" ref="auditor1Auditor"/>
+		<property name="finalMode" value="false"/>
 	</bean>
 	
 	<!-- Thread messages -->

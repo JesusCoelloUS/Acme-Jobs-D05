@@ -14,6 +14,7 @@
 
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <acme:form>
@@ -27,5 +28,10 @@
 	
 	<acme:button code="authenticated.job.form.button.duties" action="/acme-jobs/authenticated/duty/list?id=${id}"/>
 	<acme:button code="authenticated.job.form.button.auditRecords" action="/acme-jobs/authenticated/audit-record/list?id=${id}"/>
+	
+	<security:authorize access="hasRole('Auditor')">
+		<acme:button code="authenticated.job.form.button.audit-record.create" action="/acme-jobs/auditor/audit-record/create?jobId=${id}"/>
+	</security:authorize>
+	
   	<acme:form-return code="authenticated.job.form.button.return"/>
 </acme:form>
