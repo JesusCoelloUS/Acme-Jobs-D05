@@ -1,6 +1,8 @@
 
 package acme.features.worker.job;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -16,5 +18,8 @@ public interface WorkerJobRepository extends AbstractRepository {
 
 	@Query("select e from Worker e where e.id=?1")
 	Worker findOneWorkerById(int id);
+
+	@Query("select j from Job j where j.status = 'PUBLISHED' and j.deadline > CURRENT_DATE")
+	Collection<Job> findActiveJobs();
 
 }

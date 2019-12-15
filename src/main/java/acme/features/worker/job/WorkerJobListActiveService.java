@@ -1,6 +1,8 @@
 
 package acme.features.worker.job;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,11 +10,10 @@ import acme.entities.jobs.Job;
 import acme.entities.roles.Worker;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
-import acme.framework.entities.Principal;
-import acme.framework.services.AbstractShowService;
+import acme.framework.services.AbstractListService;
 
 @Service
-public class WorkerJobShowService implements AbstractShowService<Worker, Job> {
+public class WorkerJobListActiveService implements AbstractListService<Worker, Job> {
 
 	@Autowired
 	WorkerJobRepository repository;
@@ -21,11 +22,6 @@ public class WorkerJobShowService implements AbstractShowService<Worker, Job> {
 	@Override
 	public boolean authorise(final Request<Job> request) {
 		assert request != null;
-
-		Principal principal = request.getPrincipal();
-		Worker w = this.repository.findOneWorkerById(request.getPrincipal().getActiveRoleId());
-		assert principal.getActiveRoleId() == w.getId();
-
 		return true;
 	}
 
@@ -34,14 +30,13 @@ public class WorkerJobShowService implements AbstractShowService<Worker, Job> {
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "id", "reference", "title", "status", "deadline", "moreInfo", "salary", "description");
-		model.setAttribute("isActive", entity.isActive());
+		request.unbind(entity, model, "reference", "title", "status", "deadline");
 	}
 
 	@Override
-	public Job findOne(final Request<Job> request) {
+	public Collection<Job> findMany(final Request<Job> request) {
 		assert request != null;
-		return this.repository.findOneJobById(request.getModel().getInteger("id"));
+		return this.repository.findActiveJobs();
 	}
 
 }

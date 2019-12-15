@@ -69,7 +69,6 @@ public class EmployerJobDeleteService implements AbstractDeleteService<Employer,
 			d.setJob(null);
 			this.dutyRepository.delete(d);
 		}
-		//		entity.setEmployer(null);
 
 		this.repository.delete(entity);
 	}
