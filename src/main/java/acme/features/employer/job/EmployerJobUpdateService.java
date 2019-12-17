@@ -62,7 +62,9 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 		errors.state(request, this.checkReference(entity), "reference", "employer.job.error.reference");
 		errors.state(request, !this.isSpam(entity), "description", "employer.job.error.spam");
 		errors.state(request, this.dutyCompleted(entity), "finalMode", "employer.job.error.duties");
-		errors.state(request, entity.getDeadline().after(new Date()), "deadline", "employer.job.error.deadline");
+		errors.state(request, this.checkDeadline(entity), "deadline", "employer.job.error.deadline");
+		errors.state(request, this.checkStatusDraft(entity), "status", "employer.job.error.status.draft");
+		errors.state(request, this.checkStatusPublished(entity), "status", "employer.job.error.status.published");
 	}
 
 	private boolean checkReference(final Job job) {
@@ -99,6 +101,27 @@ public class EmployerJobUpdateService implements AbstractUpdateService<Employer,
 			}
 		}
 		return nSpamWords >= c.getThreshold();
+	}
+
+	private boolean checkDeadline(final Job job) {
+		if (job.getDeadline() == null) {
+			return true;
+		}
+		return job.getDeadline().after(new Date());
+	}
+
+	private boolean checkStatusDraft(final Job j) {
+		if (j.getStatus().equals("DRAFT")) {
+			return !j.getFinalMode();
+		}
+		return true;
+	}
+
+	private boolean checkStatusPublished(final Job j) {
+		if (j.getStatus().equals("PUBLISHED")) {
+			return j.getFinalMode();
+		}
+		return true;
 	}
 
 	@Override

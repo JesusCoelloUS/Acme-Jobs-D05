@@ -37,3 +37,5 @@ employer.job.error.spam = Este empleo es spam
 employer.job.error.duties = No puede guardarse en estado final un empleo hasta que sus deberes sumen 100%
 employer.job.error.reference = Este empleo ya existe
 employer.job.error.deadline = La fecha de vencimiento debe ser posterior al dia de hoy
+employer.job.error.status.draft = Empleos en borrador no deben guardarse en modo final
+employer.job.error.status.published = Empleos publicados deben guardarse en modo final

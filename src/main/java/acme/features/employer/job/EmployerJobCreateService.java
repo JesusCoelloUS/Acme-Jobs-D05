@@ -44,7 +44,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "reference", "status", "title", "deadline", "salary", "moreInfo", "description", "finalMode");
+		request.unbind(entity, model, "reference", "status", "title", "deadline", "salary", "moreInfo", "description");
 	}
 
 	@Override
@@ -54,6 +54,7 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		Employer e = this.repository.findOneEmployerById(request.getPrincipal().getActiveRoleId());
 		res.setEmployer(e);
 		res.setFinalMode(false);
+		res.setStatus("DRAFT");
 		return res;
 	}
 
@@ -64,7 +65,8 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		assert errors != null;
 		errors.state(request, !this.isSpam(entity), "description", "employer.job.error.spam");
 		errors.state(request, this.checkReference(entity), "reference", "employer.job.error.reference");
-		errors.state(request, entity.getDeadline().after(new Date()), "deadline", "employer.job.error.deadline");
+		errors.state(request, this.checkDeadline(entity), "deadline", "employer.job.error.deadline");
+
 	}
 
 	private boolean isSpam(final Job j) {
@@ -92,6 +94,13 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 			}
 		}
 		return true;
+	}
+
+	private boolean checkDeadline(final Job job) {
+		if (job.getDeadline() == null) {
+			return true;
+		}
+		return job.getDeadline().after(new Date());
 	}
 
 	@Override

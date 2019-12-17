@@ -43,6 +43,7 @@
         `version` integer not null,
         `body` varchar(255),
         `creation_moment` datetime(6),
+        `final_mode` bit,
         `status` varchar(255),
         `title` varchar(255),
         `auditor_id` integer not null,

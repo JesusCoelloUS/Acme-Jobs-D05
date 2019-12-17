@@ -27,9 +27,8 @@
 
 	<acme:form-textbox code="employer.job.form.label.reference" path="reference" placeholder="EMPx-JOBx" readonly="${option}"/>
 	<jstl:choose>
-		<jstl:when test="${command == 'create' || command == 'update' || (command == 'show' && canBeUpdated)}">
+		<jstl:when test="${command == 'update' || (command == 'show' && canBeUpdated)}">
 			<acme:form-select code="employer.job.form.label.status" path="status">
-				<acme:form-option code="---" value="---"/>
 				<acme:form-option code="employer.job.form.label.status.draft" value="DRAFT"/>
 				<acme:form-option code="employer.job.form.label.status.published" value="PUBLISHED"/>
 			</acme:form-select>
