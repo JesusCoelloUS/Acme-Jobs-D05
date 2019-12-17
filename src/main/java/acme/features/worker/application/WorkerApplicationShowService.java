@@ -1,6 +1,8 @@
 
 package acme.features.worker.application;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +39,7 @@ public class WorkerApplicationShowService implements AbstractShowService<Worker,
 		assert request != null;
 		assert entity != null;
 		assert model != null;
-		request.unbind(entity, model, "reference", "status", "statement", "creationMoment", "skills", "qualifications", "job.id");
+		request.unbind(entity, model, "reference", "status", "statement", "creationMoment", "skills", "qualifications", "rejectDecision", "job.id");
 		model.setAttribute("jobId", entity.getJob().getId());
 	}
 
@@ -47,6 +49,8 @@ public class WorkerApplicationShowService implements AbstractShowService<Worker,
 
 		int id = request.getModel().getInteger("id");
 		Application result = this.repository.findOneApplicationById(id);
+		Collection<Application> myApps = this.repository.findManyByWorkerId(request.getPrincipal().getActiveRoleId());
+		assert myApps.contains(result);
 		return result;
 	}
 

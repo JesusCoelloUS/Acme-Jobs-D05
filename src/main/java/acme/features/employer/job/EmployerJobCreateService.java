@@ -70,20 +70,35 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 	}
 
 	private boolean isSpam(final Job j) {
+		if (j.getTitle().equals("") && j.getDescription().equals("")) {
+			return false;
+		}
 		Collection<Configuration> cs = this.configurationRepository.findMany();
 		Configuration c = null;
 		for (Configuration co : cs) {
 			c = co;
 			break;
 		}
-		String[] spamWords = c.getSpamWords().split(",");
-		Integer nSpamWords = 0;
-		for (String s : spamWords) {
-			if (j.getTitle().contains(s) || j.getDescription().contains(s)) {
-				nSpamWords++;
+		Integer sum = 0;
+
+		if (!j.getTitle().equals("")) {
+			String[] title = j.getTitle().split(",");
+			for (String s : title) {
+				if (c.getSpamWords().contains(s)) {
+					sum++;
+				}
 			}
 		}
-		return nSpamWords >= c.getThreshold();
+
+		if (!j.getDescription().equals("")) {
+			String[] description = j.getDescription().split(",");
+			for (String s : description) {
+				if (c.getSpamWords().contains(s)) {
+					sum++;
+				}
+			}
+		}
+		return sum >= c.getThreshold();
 	}
 
 	private boolean checkReference(final Job job) {
@@ -100,7 +115,9 @@ public class EmployerJobCreateService implements AbstractCreateService<Employer,
 		if (job.getDeadline() == null) {
 			return true;
 		}
-		return job.getDeadline().after(new Date());
+		Date today = new Date();
+		int diff = (int) ((job.getDeadline().getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+		return diff >= 7;
 	}
 
 	@Override

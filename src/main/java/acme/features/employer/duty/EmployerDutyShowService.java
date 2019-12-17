@@ -1,10 +1,13 @@
 
 package acme.features.employer.duty;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.duties.Duty;
+import acme.entities.jobs.Job;
 import acme.entities.roles.Employer;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -38,7 +41,10 @@ public class EmployerDutyShowService implements AbstractShowService<Employer, Du
 	@Override
 	public Duty findOne(final Request<Duty> request) {
 		assert request != null;
-		return this.repository.findOneDutyById(request.getModel().getInteger("id"));
+		Duty res = this.repository.findOneDutyById(request.getModel().getInteger("id"));
+		Collection<Job> myJobs = this.repository.findMyJobs(request.getPrincipal().getActiveRoleId());
+		assert myJobs.contains(res.getJob());
+		return res;
 	}
 
 }

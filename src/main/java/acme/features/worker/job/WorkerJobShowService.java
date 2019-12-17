@@ -1,6 +1,8 @@
 
 package acme.features.worker.job;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +43,10 @@ public class WorkerJobShowService implements AbstractShowService<Worker, Job> {
 	@Override
 	public Job findOne(final Request<Job> request) {
 		assert request != null;
-		return this.repository.findOneJobById(request.getModel().getInteger("id"));
+		Job res = this.repository.findOneJobById(request.getModel().getInteger("id"));
+		Collection<Job> activeJobs = this.repository.findActiveJobs();
+		assert activeJobs.contains(res);
+		return res;
 	}
 
 }

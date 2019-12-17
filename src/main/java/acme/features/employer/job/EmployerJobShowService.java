@@ -50,7 +50,10 @@ public class EmployerJobShowService implements AbstractShowService<Employer, Job
 	@Override
 	public Job findOne(final Request<Job> request) {
 		assert request != null;
-		return this.repository.findOneJobById(request.getModel().getInteger("id"));
+		Job res = this.repository.findOneJobById(request.getModel().getInteger("id"));
+		Collection<Job> myJobs = this.repository.findMyJobs(request.getPrincipal().getActiveRoleId());
+		assert myJobs.contains(res);
+		return res;
 	}
 
 }

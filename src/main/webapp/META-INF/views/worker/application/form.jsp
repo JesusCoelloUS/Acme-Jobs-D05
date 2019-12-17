@@ -28,7 +28,7 @@
 	<jstl:if test="${command != 'create'}">
 	<acme:form-textbox code="worker.application.form.label.status" path="status" readonly="true"/>
 	</jstl:if>
-	<jstl:if test="${command != 'create'}">
+	<jstl:if test="${command != 'create' && status == 'REJECTED'}">
 	<acme:form-textarea code="employer.application.form.label.rejectDecision" path="rejectDecision" readonly="true"/>
 	</jstl:if>
 	<acme:form-textarea code="worker.application.form.label.statement" path="statement" readonly="${option}"/>

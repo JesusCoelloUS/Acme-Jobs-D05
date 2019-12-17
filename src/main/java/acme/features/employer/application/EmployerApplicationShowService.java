@@ -1,6 +1,8 @@
 
 package acme.features.employer.application;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,8 @@ public class EmployerApplicationShowService implements AbstractShowService<Emplo
 
 		id = request.getModel().getInteger("id");
 		result = this.repository.findOneApplicationById(id);
+		Collection<Application> apps = this.repository.findApplicationsMadeToMyJobs(request.getPrincipal().getActiveRoleId());
+		assert apps.contains(result);
 		return result;
 	}
 

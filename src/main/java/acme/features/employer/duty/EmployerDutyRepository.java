@@ -25,4 +25,7 @@ public interface EmployerDutyRepository extends AbstractRepository {
 
 	@Query("select e from Employer e where e.id=?1")
 	Employer findOneEmployerById(int id);
+
+	@Query("select j from Job j where j.employer.id=?1")
+	Collection<Job> findMyJobs(int id);
 }
